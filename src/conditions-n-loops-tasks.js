@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number > -1;
 }
 
 /**
@@ -38,8 +38,11 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let out = a;
+  if (out < b) out = b;
+  if (out < c) out = c;
+  return out;
 }
 
 /**
@@ -82,8 +85,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let out = false;
+  out = a + b > c && a + c > b && c + b > a;
+  if (a && b && c && out) out = a === b || b === c || a === c;
+  return out;
 }
 
 /**
@@ -100,8 +106,58 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  function toRom(dig) {
+    let out = false;
+    switch (dig) {
+      case 1:
+        out = 'I';
+        break;
+      case 2:
+        out = 'II';
+        break;
+      case 3:
+        out = 'III';
+        break;
+      case 4:
+        out = 'IV';
+        break;
+      case 5:
+        out = 'V';
+        break;
+      case 6:
+        out = 'VI';
+        break;
+      case 7:
+        out = 'VII';
+        break;
+      case 8:
+        out = 'VIII';
+        break;
+      case 9:
+        out = 'IX';
+        break;
+      case 10:
+        out = 'X';
+        break;
+      case 20:
+        out = 'XX';
+        break;
+      case 30:
+        out = 'XXX';
+        break;
+      default:
+        out = '';
+        break;
+    }
+    return out;
+  }
+  let first = '';
+  let second = '';
+
+  second = Math.round(num % 10);
+  first = num - second;
+  return toRom(first) + toRom(second);
 }
 
 /**
@@ -119,8 +175,95 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  function toWord(dig) {
+    let out = false;
+    switch (dig) {
+      case 0:
+        out = 'zero';
+        break;
+      case 1:
+        out = 'one';
+        break;
+      case 2:
+        out = 'two';
+        break;
+      case 3:
+        out = 'three';
+        break;
+      case 4:
+        out = 'four';
+        break;
+      case 5:
+        out = 'five';
+        break;
+      case 6:
+        out = 'six';
+        break;
+      case 7:
+        out = 'seven';
+        break;
+      case 8:
+        out = 'eight';
+        break;
+      case 9:
+        out = 'nine';
+        break;
+      case '.':
+        out = 'point';
+        break;
+      case ',':
+        out = 'point';
+        break;
+      case '-':
+        out = 'minus';
+        break;
+      default:
+        out = dig;
+        break;
+    }
+    return out;
+  }
+
+  function integerToWords(intnumber) {
+    let words = '';
+    let intnum = intnumber;
+    while (intnum !== '') {
+      if (intnum === 0) {
+        words = `${toWord(0)} ${words}`;
+        intnum = '';
+      } else {
+        words = words ? `${toWord(intnum % 10)} ${words}` : toWord(intnum % 10);
+        intnum = intnum > 9 ? (intnum - (intnum % 10)) / 10 : '';
+      }
+    }
+    return words;
+  }
+
+  let out = '';
+  let num = numberStr.replace(',', '.');
+  const minus = num > -1 ? '' : 'minus ';
+  let temp = 0;
+  num = parseFloat(num) * 1;
+  num = num > -1 ? num : num * -1;
+  console.log(num);
+
+  if (num % 1) {
+    temp = num % 1;
+    temp = Math.round(temp * 1000000) / 1000000;
+    console.log(temp, num);
+
+    while (temp !== Math.floor((temp * 1000000) / 1000000)) {
+      temp *= 10;
+    }
+    temp = Math.round(temp);
+    out = ` point ${integerToWords(temp)}`;
+    num = Math.floor(num);
+    console.log(temp, num);
+  }
+  out = integerToWords(num) + out;
+
+  return minus + out;
 }
 
 /**
