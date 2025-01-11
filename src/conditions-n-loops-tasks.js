@@ -175,91 +175,63 @@ function convertToRomanNumerals(num) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  // function toWord(dig) {
-  //   let out = false;
-  //   switch (dig) {
-  //     case 0:
-  //       out = 'zero';
-  //       break;
-  //     case 1:
-  //       out = 'one';
-  //       break;
-  //     case 2:
-  //       out = 'two';
-  //       break;
-  //     case 3:
-  //       out = 'three';
-  //       break;
-  //     case 4:
-  //       out = 'four';
-  //       break;
-  //     case 5:
-  //       out = 'five';
-  //       break;
-  //     case 6:
-  //       out = 'six';
-  //       break;
-  //     case 7:
-  //       out = 'seven';
-  //       break;
-  //     case 8:
-  //       out = 'eight';
-  //       break;
-  //     case 9:
-  //       out = 'nine';
-  //       break;
-  //     case '.':
-  //       out = 'point';
-  //       break;
-  //     case ',':
-  //       out = 'point';
-  //       break;
-  //     case '-':
-  //       out = 'minus';
-  //       break;
-  //     default:
-  //       out = dig;
-  //       break;
-  //   }
-  //   return out;
-  // }
-  // function integerToWords(intnumber) {
-  //   let words = '';
-  //   let intnum = intnumber;
-  //   while (intnum !== '') {
-  //     if (intnum === 0) {
-  //       words = `${toWord(0)} ${words}`;
-  //       intnum = '';
-  //     } else {
-  //       words = words ? `${toWord(intnum % 10)} ${words}` : toWord(intnum % 10);
-  //       intnum = intnum > 9 ? (intnum - (intnum % 10)) / 10 : '';
-  //     }
-  //   }
-  //   return words;
-  // }
-  // let out = '';
-  // let num = numberStr.replace(',', '.');
-  // const minus = num > -1 ? '' : 'minus ';
-  // let temp = 0;
-  // num = parseFloat(num) * 1;
-  // num = num > -1 ? num : num * -1;
-  // console.log(num);
-  // if (num % 1) {
-  //   temp = num % 1;
-  //   temp = Math.round(temp * 1000000) / 1000000;
-  //   console.log(temp, num);
-  //   while (temp !== Math.floor((temp * 1000000) / 1000000)) {
-  //     temp *= 10;
-  //   }
-  //   temp = Math.round(temp);
-  //   out = ` point ${integerToWords(temp)}`;
-  //   num = Math.floor(num);
-  //   console.log(temp, num);
-  // }
-  // out = integerToWords(num) + out;
-  // return minus + out;
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  function toWord(dig) {
+    let out = false;
+    switch (dig) {
+      case '0':
+        out = 'zero';
+        break;
+      case '1':
+        out = 'one';
+        break;
+      case '2':
+        out = 'two';
+        break;
+      case '3':
+        out = 'three';
+        break;
+      case '4':
+        out = 'four';
+        break;
+      case '5':
+        out = 'five';
+        break;
+      case '6':
+        out = 'six';
+        break;
+      case '7':
+        out = 'seven';
+        break;
+      case '8':
+        out = 'eight';
+        break;
+      case '9':
+        out = 'nine';
+        break;
+      case '.':
+        out = 'point';
+        break;
+      case ',':
+        out = 'point';
+        break;
+      case '-':
+        out = 'minus';
+        break;
+      default:
+        out = dig;
+        break;
+    }
+    return out;
+  }
+  let out = '';
+  let space;
+  const num = numberStr;
+  for (let i = num.length - 1; i >= 0; i -= 1) {
+    space = i === 0 ? '' : ' ';
+    out = space + toWord(num[i]) + out;
+  }
+  return out;
 }
 
 /**
@@ -274,8 +246,12 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let out = true;
+  for (let i = 0; i < Math.trunc(str.length / 2); i += 1) {
+    if (str[i] !== str[str.length - 1 - i]) out = false;
+  }
+  return out;
 }
 
 /**
