@@ -318,7 +318,9 @@ function isContainNumber(num, digit) {
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
 function getBalanceIndex(arr) {
-  throw new Error('Not implemented');
+  for (let index = 0; index < arr.length - 2; index += 1) {
+    
+  }
 }
 
 /**
